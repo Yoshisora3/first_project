@@ -11,7 +11,7 @@ Webで簡単に使用できるメモ帳を作成しました
 ・Flask
 ・HTML
 ・CSS
-・SQLLite
+・SQLite
 ・SQLALchemy
 ・Jinga2
 
