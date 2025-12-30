@@ -22,7 +22,7 @@
     <form action="/del" method="POST">
         <select name="delnote" class="selectbox">
         {% for user in users %}
-        <option>{{ user.id }}&nbsp;{{ user.name }}</option>
+        <option>{{ user.id }}:&nbsp;{{ user.name }}</option>
         {% endfor %}
         </select>
         <button type="submit">削除</button>

@@ -52,7 +52,19 @@ def del_user():
         return render_template('index.html', users=session.query(User).all(), notecount=len(session.query(User).all()))
     if request.method == 'POST' and request.form['delnote'] != "":
         delname = request.form['delnote']
-        user = session.query(User).filter_by(id=delname[0]).first()
+        delid = delname[0]
+
+        #メモが10個以上あるとうまく消せないので処理を追加
+        flag = 0
+        for i in  delname:
+            if i == ":":
+                break
+            if flag == 1:
+                delid += i
+            else:
+                flag = 1
+        
+        user = session.query(User).filter_by(id=delid).first()
         session.delete(user)
         session.commit()
 
