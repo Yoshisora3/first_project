@@ -18,7 +18,7 @@
     <b>メモを削除する</b>
     <form action="/del" method="POST">
         <select name="delnote" class="selectbox">
-        {% for user in users: %}
+        {% for user in users %}
         <option>{{ user.name }}</option>
         {% endfor %}
         </select>
@@ -26,10 +26,12 @@
     </form>
     </div>
     <p><b>メモ一覧</b></p>
+    {% if notecount > 0 %}
     <div class="border">
     {% for user in users: %}
     <li>{{ user.name }}</li>
     {% endfor %}
+    {% endif %}
     </div>
 </body>
 </html>

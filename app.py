@@ -19,14 +19,11 @@ class User(Base):
 
 Base.metadata.create_all(engine)
 
-#グローバル変数 
-notecount = 0
-
 # ルートにアクセスしたときの処理
 @app.route('/')
 def index():
     users = session.query(User).all()
-    return render_template('index.html', users=users)
+    return render_template('index.html', users=users, notecount=len(session.query(User).all()))
 
 # 名前を追加する
 @app.route('/add', methods=['GET', 'POST'])
@@ -38,24 +35,21 @@ def add_user():
         session.commit()
 
         users = session.query(User).all()
-        global notecount
-        notecount += 1
-        return render_template('index.html', users=users)
+        return render_template('index.html', users=users, notecount=len(session.query(User).all()))
                
     if request.method == 'GET':
         return "エラー GET送信されました"
     
     users = session.query(User).all()
-    return render_template('index.html', users=users)
+    return render_template('index.html', users=users, notecount=len(session.query(User).all()))
 
 @app.route('/del', methods=['GET', 'POST'])
 def del_user():
     if request.method == 'GET':
         return "エラー GET送信されました"
     
-    global notecount
-    if notecount == 0:
-        return render_template('index.html')
+    if len(session.query(User).all()) == 0:
+        return render_template('index.html', users=session.query(User).all(), notecount=len(session.query(User).all()))
     if request.method == 'POST' and request.form['delnote'] != "":
         delname = request.form['delnote']
         user = session.query(User).filter_by(name=delname).first()
@@ -63,8 +57,7 @@ def del_user():
         session.commit()
 
         users = session.query(User).all()
-        notecount -= 1
-        return render_template('index.html', users=users)
+        return render_template('index.html', users=users, notecount=len(session.query(User).all()))
     
     
     return "エラー4"

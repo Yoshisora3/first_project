@@ -26,7 +26,7 @@
 }
 
 .border {
-width: 400px;
+max-width: 800px;
 display: inline-block;   /* 中身に合わせて幅が決まる */
 border: 2px solid gray;
 border-radius: 10px; /* この行で角を丸くする */
