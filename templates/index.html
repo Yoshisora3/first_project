@@ -9,17 +9,20 @@
 <body>
     <div class="aqua">
     <h1>簡単メモ帳</h1>
-    <b>メモを追加する</b>
+    <div class="space-bottom"></div>
+    <b><span class="space-right">メモを追加する</span>メモを更新する</b>
+    <div class="container">
     <form action="/add" method="POST">
         <textarea name="addnote" class="textarea"></textarea>
         <button type="submit" class="botton">追加</button>
     </form>
-    <p></p>
+    </div>
+    <div class="space-bottom"></div>
     <b>メモを削除する</b>
     <form action="/del" method="POST">
         <select name="delnote" class="selectbox">
         {% for user in users %}
-        <option>{{ user.name }}</option>
+        <option>{{ user.id }}&nbsp;{{ user.name }}</option>
         {% endfor %}
         </select>
         <button type="submit">削除</button>

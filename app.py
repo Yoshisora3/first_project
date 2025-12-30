@@ -52,7 +52,7 @@ def del_user():
         return render_template('index.html', users=session.query(User).all(), notecount=len(session.query(User).all()))
     if request.method == 'POST' and request.form['delnote'] != "":
         delname = request.form['delnote']
-        user = session.query(User).filter_by(name=delname).first()
+        user = session.query(User).filter_by(id=delname[0]).first()
         session.delete(user)
         session.commit()
 
