@@ -12,7 +12,7 @@ Webで簡単に使用できるメモ帳を作成しました
 ・HTML
 ・CSS
 ・SQLite
-・SQLALchemy
+・SQLAlchemy
 ・Jinja2
 
 ## 機能改善  
