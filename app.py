@@ -23,7 +23,7 @@ Base.metadata.create_all(engine)
 @app.route('/')
 def index():
     users = session.query(User).all()
-    return render_template('index.html', users=users, notecount=len(session.query(User).all()))
+    return render_template('index.html', users=users, notecount=len(users))
 
 # 名前を追加する
 @app.route('/add', methods=['GET', 'POST'])
@@ -35,13 +35,13 @@ def add_user():
         session.commit()
 
         users = session.query(User).all()
-        return render_template('index.html', users=users, notecount=len(session.query(User).all()))
+        return render_template('index.html', users=users, notecount=len(users))
                
     if request.method == 'GET':
         return "エラー GET送信されました"
     
     users = session.query(User).all()
-    return render_template('index.html', users=users, notecount=len(session.query(User).all()))
+    return render_template('index.html', users=users, notecount=len(users))
 
 @app.route('/del', methods=['GET', 'POST'])
 def del_user():
@@ -69,9 +69,50 @@ def del_user():
         session.commit()
 
         users = session.query(User).all()
-        return render_template('index.html', users=users, notecount=len(session.query(User).all()))
+        return render_template('index.html', users=users, notecount=len(users))
     
     
     return "エラー4"
+
+@app.route('/update', methods=['GET', 'POST'])
+def update_user():
+    if request.method == 'GET':
+        return "エラー GET送信されました"
+    users = session.query(User).all()
+    if len(users) == 0:
+        return render_template('index.html', users=users, notecount=len(users))
+    if request.method == 'POST' and request.form['upnote'] != "":
+        upname = request.form['upnote']
+        upid = upname[0]
+
+        #メモが10個以上あるとうまく消せないので処理を追加
+        flag = 0
+        for i in  upname:
+            if i == ":":
+                break
+            if flag == 1:
+                upid += i
+            else:
+                flag = 1
+            
+        user = session.query(User).filter_by(id=upid).first()
+
+    return render_template('update.html', users=user)
+
+@app.route('/update_comp', methods=['GET', 'POST'])
+def updatecomp_user():
+    if request.method == 'GET':
+        return "エラー GET送信されました"
+    
+    upname = request.form['upnote']
+    
+    upid = request.form['upid']
+    user = session.query(User).filter_by(id=upid).first()
+    user.name = upname
+    session.commit()
+
+    users = session.query(User).all()
+    return render_template('index.html', users=users, notecount=len(users))
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>メモの更新</title>
+</head>
+<body>
+    <div class="aqua">
+    <h1>メモの更新</h1>
+
+    <b>更新する</b>
+    <form action="/update_comp" method="POST">
+        <input type="hidden" name="upid" value="{{ users.id }}">
+        <textarea name="upnote" class="textarea" required>{{ users.name }}</textarea>
+        <button type="submit" class="botton">更新</button>
+    </form>
+</body>
+</html>

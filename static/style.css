@@ -42,5 +42,9 @@ padding: 5px 20px 10px 30px;
 }
 
 .space-right {
-  margin-right: 300px; /* 右側に12pxの余白 */
+  margin-right: 347px; /* 右側に12pxの余白 */
+}
+
+.space-right2 {
+  margin-right: 100px; /* 右側に12pxの余白 */
 }

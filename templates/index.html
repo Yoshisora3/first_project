@@ -10,15 +10,26 @@
     <div class="aqua">
     <h1>簡単メモ帳</h1>
     <div class="space-bottom"></div>
-    <b><span class="space-right">メモを追加する</span>メモを更新する</b>
+    <b><span class="space-right">追加する</span>更新する</b>
     <div class="container">
     <form action="/add" method="POST">
         <textarea name="addnote" class="textarea"></textarea>
         <button type="submit" class="botton">追加</button>
     </form>
+
+    <div class="space-right2"></div>
+    <form action="/update" method="POST">
+        <select name="upnote" class="selectbox">
+        {% for user in users %}
+        <option>{{ user.id }}:&nbsp;{{ user.name }}</option>
+        {% endfor %}
+        </select>
+        <button type="submit">更新</button>
+    </form>
     </div>
+
     <div class="space-bottom"></div>
-    <b>メモを削除する</b>
+    <b>削除する</b>
     <form action="/del" method="POST">
         <select name="delnote" class="selectbox">
         {% for user in users %}
@@ -28,12 +39,15 @@
         <button type="submit">削除</button>
     </form>
     </div>
-    <p><b>メモ一覧</b></p>
+
+    <p><b>一覧</b></p>
     {% if notecount > 0 %}
     <div class="border">
     {% for user in users: %}
     <li>{{ user.name }}</li>
     {% endfor %}
+    {% else %}
+    <p>メモはありません</p>
     {% endif %}
     </div>
 </body>
