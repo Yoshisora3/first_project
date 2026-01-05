@@ -21,7 +21,7 @@ class Notepad(Base):
 Base.metadata.create_all(engine)
 
 # ルートにアクセスしたときの処理
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     notes = session.query(Notepad).all()
     return render_template('index.html', notes=notes, notecount=len(notes))

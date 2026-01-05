@@ -18,10 +18,17 @@
     width: 310px;      /* 幅 */
 }
 
-.botton {
+.button {
     position: fixed;
     top: 125px;
     left: 323px;
+    height: 3em; /* 高さを3文字分 */
+}
+
+.button2 {
+    position: fixed;
+    top: 125px;
+    left: 375px;
     height: 3em; /* 高さを3文字分 */
 }
 

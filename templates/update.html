@@ -11,10 +11,15 @@
     <h1>メモの更新</h1>
 
     <b>更新する</b>
+    <div class="container">
     <form action="/update_comp" method="POST">
         <input type="hidden" name="upid" value="{{ notes.id }}">
         <textarea name="upnote" class="textarea" required>{{ notes.note }}</textarea>
-        <button type="submit" class="botton">更新</button>
+        <button type="submit" class="button">更新</button>
     </form>
+     <form action="/" method="POST">
+        <button type="submit" class="button2">戻る</button>
+    </form>
+    </div>
 </body>
 </html>
