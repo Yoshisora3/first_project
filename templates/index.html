@@ -21,7 +21,7 @@
     <form action="/update" method="POST">
         <select name="upnote" class="selectbox">
         {% for user in users %}
-        <option>{{ user.id }}:&nbsp;{{ user.name }}</option>
+        <option value="{{ user.id }}">{{ user.name }}</option>
         {% endfor %}
         </select>
         <button type="submit">更新</button>
@@ -31,9 +31,9 @@
     <div class="space-bottom"></div>
     <b>削除する</b>
     <form action="/del" method="POST">
-        <select name="delnote" class="selectbox">
+        <select name="delid" class="selectbox">
         {% for user in users %}
-        <option>{{ user.id }}:&nbsp;{{ user.name }}</option>
+        <option value="{{ user.id }}">{{ user.name }}</option>
         {% endfor %}
         </select>
         <button type="submit">削除</button>
