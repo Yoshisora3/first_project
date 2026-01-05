@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,8 +20,8 @@
     <div class="space-right2"></div>
     <form action="/update" method="POST">
         <select name="upnote" class="selectbox">
-        {% for user in users %}
-        <option value="{{ user.id }}">{{ user.name }}</option>
+        {% for note in notes %}
+        <option value="{{ note.id }}">{{ note.note }}</option>
         {% endfor %}
         </select>
         <button type="submit">更新</button>
@@ -32,8 +32,8 @@
     <b>削除する</b>
     <form action="/del" method="POST">
         <select name="delid" class="selectbox">
-        {% for user in users %}
-        <option value="{{ user.id }}">{{ user.name }}</option>
+        {% for note in notes %}
+        <option value="{{ note.id }}">{{ note.note }}</option>
         {% endfor %}
         </select>
         <button type="submit">削除</button>
@@ -43,8 +43,8 @@
     <p><b>一覧</b></p>
     {% if notecount > 0 %}
     <div class="border">
-    {% for user in users: %}
-    <li>{{ user.name }}</li>
+    {% for note in notes: %}
+    <li>{{ note.note }}</li>
     {% endfor %}
     {% else %}
     <p>メモはありません</p>

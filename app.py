@@ -1,7 +1,7 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
-from utils import id_search
+from utils import id_search, method_judge
 
 # Flaskアプリの準備
 app = Flask(__name__)
@@ -13,76 +13,65 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 # モデル定義
-class User(Base):
-    __tablename__ = 'users'
+class Notepad(Base):
+    __tablename__ = 'notes'
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    note = Column(String)
 
 Base.metadata.create_all(engine)
 
 # ルートにアクセスしたときの処理
 @app.route('/')
 def index():
-    users = session.query(User).all()
-    return render_template('index.html', users=users, notecount=len(users))
+    notes = session.query(Notepad).all()
+    return render_template('index.html', notes=notes, notecount=len(notes))
 
 # メモの追加
 @app.route('/add', methods=['GET', 'POST'])
-def add_user():
-    if request.method == 'POST' and request.form['addnote'] != "":
-        name = request.form['addnote']
-        user = User(name=name)
-        session.add(user)
-        session.commit()
+def add_note():
+    method_judge(request.method)
 
-        users = session.query(User).all()
-        return render_template('index.html', users=users, notecount=len(users))
-               
-    if request.method == 'GET':
-        return "エラー GET送信されました"
+    if request.form['addnote'] != "":
+        addnote = Notepad(note=request.form['addnote'])
+        session.add(addnote)
+        session.commit()
     
-    users = session.query(User).all()
-    return render_template('index.html', users=users, notecount=len(users))
+    return redirect(url_for('index'))
 
 # メモの削除
 @app.route('/del', methods=['GET', 'POST'])
-def del_user():
-    if request.method == 'GET':
-        return "エラー GET送信されました"
+def del_note():
+    method_judge(request.method)
         
-    if len(session.query(User).all()) == 0:
-        return render_template('index.html', users=session.query(User).all(), notecount=len(session.query(User).all()))
+    if len(session.query(Notepad).all()) == 0:
+        return redirect(url_for('index'))
     
-    session.delete(id_search(session, request.form['delid'], User, request.method))
+    session.delete(id_search(session, request.form['delid'], Notepad))
     session.commit()
-    users = session.query(User).all()
 
-    return render_template('index.html', users=users, notecount=len(users))
+    return redirect(url_for('index'))
 
 # メモの更新
 @app.route('/update', methods=['GET', 'POST'])
-def update_user():
-    if request.method == 'GET':
-        return "エラー GET送信されました"
+def update_note():
+    method_judge(request.method)
     
-    users = session.query(User).all()
-    if len(users) == 0:
-        return render_template('index.html', users=users, notecount=len(users))
+    notes = session.query(Notepad).all()
+    if len(notes) == 0:
+        return redirect(url_for('index'))
 
-    return render_template('update.html', users=id_search(session, request.form['upnote'], User, request.method))
+    return render_template('update.html', notes=id_search(session, request.form['upnote'], Notepad))
 
 # メモ更新の完了
 @app.route('/update_comp', methods=['GET', 'POST'])
-def updatecomp_user():
-    if request.method == 'GET':
-        return "エラー GET送信されました"
+def updatecomp_note():
+    method_judge(request.method)
     
-    user = id_search(session, request.form['upid'], User, request.method)
-    user.name = request.form['upnote']
+    upnote = id_search(session, request.form['upid'], Notepad)
+    upnote.note = request.form['upnote']
     session.commit()
 
-    users = session.query(User).all()
-    return render_template('index.html', users=users, notecount=len(users))
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

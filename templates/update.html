@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,8 @@
 
     <b>更新する</b>
     <form action="/update_comp" method="POST">
-        <input type="hidden" name="upid" value="{{ users.id }}">
-        <textarea name="upnote" class="textarea" required>{{ users.name }}</textarea>
+        <input type="hidden" name="upid" value="{{ notes.id }}">
+        <textarea name="upnote" class="textarea" required>{{ notes.note }}</textarea>
         <button type="submit" class="botton">更新</button>
     </form>
 </body>
