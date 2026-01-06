@@ -21,4 +21,4 @@ Webで簡単に使用できるメモ帳を作成しました
 
 ## 使用方法  
 1　Python、Flask、SQLAlchemyをインストール  
-2   Python app.pyで起動します
+2  Python app.pyで起動します
