@@ -20,7 +20,5 @@ Webで簡単に使用できるメモ帳を作成しました
 ログイン機能を追加予定です
 
 ## 使用方法  
-1　下記をインストール  
-　　Python、Flask、SQLAlchemy  
-
+1　Python、Flask、SQLAlchemyをインストール  
 2   Python app.pyで起動します
