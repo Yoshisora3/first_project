@@ -2,9 +2,15 @@ from flask import Flask, request, render_template, redirect, url_for
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
 from utils import id_search, method_judge
+from flask_login import LoginManager, login_user
+from auth.login import User
 
 # Flaskアプリの準備
 app = Flask(__name__)
+app.secret_key = "test"
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 # SQLAlchemyの準備
 engine = create_engine('sqlite:///flask_memo.db')
@@ -19,6 +25,17 @@ class Notepad(Base):
     note = Column(String)
 
 Base.metadata.create_all(engine)
+
+# 引数user_idにセッション内に登録されているIDが入ります
+@login_manager.user_loader
+def load_user(user_id):
+   #認証情報さえかえせればいいので、別に新規作成しても問題なし
+    return User(user_id)
+
+@app.route("/login")
+def login():
+    login_user(User(1))
+    return "Login完了"
 
 # ルートにアクセスしたときの処理
 @app.route('/', methods=['GET', 'POST'])
