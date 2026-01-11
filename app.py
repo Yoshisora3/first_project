@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
 from utils import id_search, method_judge
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from auth.login import User
 
 # Flaskアプリの準備
@@ -26,6 +26,8 @@ class Notepad(Base):
 
 Base.metadata.create_all(engine)
 
+login_manager.login_view = 'login'
+
 # 引数user_idにセッション内に登録されているIDが入ります
 @login_manager.user_loader
 def load_user(user_id):
@@ -34,11 +36,17 @@ def load_user(user_id):
 
 @app.route("/login")
 def login():
-    login_user(User(1))
-    return "Login完了"
+    login_user(User(2))
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return "Logout完了"
 
 # ルートにアクセスしたときの処理
 @app.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
     notes = session.query(Notepad).all()
     return render_template('index.html', notes=notes, notecount=len(notes))
