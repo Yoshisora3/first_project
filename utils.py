@@ -1,8 +1,6 @@
 from flask import abort
-def id_search(session, search_id, User):
-    
-        
-        user = session.query(User).filter_by(id=search_id).first()
+def id_search(session, search_id, User): 
+        user = session.query(User).filter_by(noteid=search_id).first()
 
         return user
     

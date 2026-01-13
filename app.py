@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
 from utils import id_search, method_judge
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
-from auth.login import User
+from auth.login import User, TestUser, user_check
 
 # Flaskアプリの準備
 app = Flask(__name__)
@@ -21,7 +21,7 @@ session = Session()
 # モデル定義
 class Notepad(Base):
     __tablename__ = 'notes'
-    id = Column(Integer, primary_key=True)
+    noteid = Column(Integer, primary_key=True)
     note = Column(String)
 
 Base.metadata.create_all(engine)
@@ -36,8 +36,16 @@ def load_user(user_id):
 
 @app.route("/login")
 def login():
-    login_user(User(2))
     return render_template('login.html')
+
+@app.route("/login_check", methods=['GET', 'POST'])
+def login_check():
+    test_user = TestUser("user1", "testuser")
+    if user_check(test_user, request.form['userid'], request.form['pass']):
+        login_user(User(1))
+        return redirect(url_for('index'))
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
@@ -70,21 +78,19 @@ def del_note():
         
     if len(session.query(Notepad).all()) == 0:
         return redirect(url_for('index'))
-    
     session.delete(id_search(session, request.form['delid'], Notepad))
     session.commit()
-
     return redirect(url_for('index'))
 
 # メモの更新
 @app.route('/update', methods=['GET', 'POST'])
 def update_note():
     method_judge(request.method)
-    
+
     notes = session.query(Notepad).all()
     if len(notes) == 0:
         return redirect(url_for('index'))
-
+        
     return render_template('update.html', notes=id_search(session, request.form['upnote'], Notepad))
 
 # メモ更新の完了

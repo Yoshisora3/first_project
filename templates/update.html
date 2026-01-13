@@ -13,7 +13,7 @@
     <b>更新する</b>
     <div class="container">
     <form action="/update_comp" method="POST">
-        <input type="hidden" name="upid" value="{{ notes.id }}">
+        <input type="hidden" name="upid" value="{{ notes.noteid }}">
         <textarea name="upnote" class="textarea" required>{{ notes.note }}</textarea>
         <button type="submit" class="button">更新</button>
     </form>

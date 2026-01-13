@@ -21,7 +21,7 @@
     <form action="/update" method="POST">
         <select name="upnote" class="selectbox">
         {% for note in notes %}
-        <option value="{{ note.id }}">{{ note.note }}</option>
+        <option value="{{ note.noteid }}">{{ note.note }}</option>
         {% endfor %}
         </select>
         <button type="submit">更新</button>
@@ -33,7 +33,7 @@
     <form action="/del" method="POST">
         <select name="delid" class="selectbox">
         {% for note in notes %}
-        <option value="{{ note.id }}">{{ note.note }}</option>
+        <option value="{{ note.noteid }}">{{ note.note }}</option>
         {% endfor %}
         </select>
         <button type="submit">削除</button>
