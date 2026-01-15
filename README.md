@@ -14,12 +14,13 @@ Webで簡単に使用できるメモ帳を作成しました
 ・SQLite
 ・SQLAlchemy
 ・Jinja2
+・Flask-Login
 
 ## 機能改善  
 メモの改行ができるように修正する予定です  
-ログイン機能を追加予定です
+ログイン機能を改善予定です
 
 ## 使用方法  
-1　Python、Flask、SQLAlchemyをインストール  
+1　Python、Flask、SQLAlchemy、Flask-Loginをインストール  
 
 2　Python app.pyで起動します
