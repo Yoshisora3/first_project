@@ -24,5 +24,3 @@ Webで簡単に使用できるメモ帳を作成しました
 1　Python、Flask、SQLAlchemy、flask-loginをインストール  
 
 2　Python app.pyで起動します
-
-![test](https://github.com/user-attachments/assets/77a2c282-a6f6-4d52-96ff-50e6d7159f8f)
