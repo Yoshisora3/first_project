@@ -30,6 +30,7 @@ Webで簡単に使用できるメモ帳を作成しました
 追加したいメモを、追加するの項目に入力して、右側にある追加ボタンをクリック  
 ![addimage](https://github.com/user-attachments/assets/bcdcbd95-0f60-45ec-a7de-af95b00b499c)
 メモ一覧に追加したメモが表示されます  
+![addimage2](https://github.com/user-attachments/assets/51b036f7-26d3-4d0a-94a7-965060c1b6fa)
 
 ### メモの削除
 削除したいメモを、削除するのセレクトボックスから選択して、その右側にある削除ボタンをクリック  
