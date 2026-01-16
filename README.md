@@ -41,4 +41,6 @@ Webで簡単に使用できるメモ帳を作成しました
 #### 1　更新したいメモを、更新するのセレクトボックスから選択して、その右側にある更新ボタンをクリック  
 ![updateimage](https://github.com/user-attachments/assets/a80201a4-935e-4948-883e-22973ef2956d)
 #### 2　更新画面に切り替わるので、更新するの項目に入力して、その右側にある更新ボタンをクリック  
-#### 3　メモ一覧に更新したメモが表示されます
+![updateimage2](https://github.com/user-attachments/assets/f4e20fea-9ab6-4662-a88c-1d3bc8a7b382)
+#### 3　メモ一覧に更新したメモが表示されます  
+![updateimage2](https://github.com/user-attachments/assets/f4e20fea-9ab6-4662-a88c-1d3bc8a7b382)
