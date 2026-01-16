@@ -28,7 +28,7 @@ Webで簡単に使用できるメモ帳を作成しました
 ## メモ帳機能の説明(作成中です)
 ### メモの追加
 追加したいメモを、追加するの項目に入力して、右側にある追加ボタンをクリック  
-![addimage](https://github.com/user-attachments/assets/88ce6369-393d-4495-9b9c-eb0985cbbfdc)
+![addimage](https://github.com/user-attachments/assets/bcdcbd95-0f60-45ec-a7de-af95b00b499c)
 メモ一覧に追加したメモが表示されます  
 
 ### メモの削除
