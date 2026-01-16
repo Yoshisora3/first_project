@@ -36,7 +36,7 @@ Webで簡単に使用できるメモ帳を作成しました
 1　削除したいメモを、削除するのセレクトボックスから選択して、その右側にある削除ボタンをクリック  
 ![delimage](https://github.com/user-attachments/assets/29255364-d8b1-4423-b457-30af6ac4dfd9)
 2　メモ一覧から選択したメモが削除されます
-
+![delimage2](https://github.com/user-attachments/assets/6210697b-2a7b-4ac4-90d8-312a769e9c05)
 ### メモの更新
 更新したいメモを、更新するのセレクトボックスから選択して、その右側にある削除ボタンをクリック  
 
