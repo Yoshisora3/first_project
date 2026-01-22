@@ -14,6 +14,15 @@
     
 }
 
+.login_textarea {
+    width: 300px;      /* 幅 */
+    height: 15px;      /* 高さ */
+    font-size: 14px;   /* 文字サイズ */
+    padding: 5px;      /* 内側余白 */
+    resize: none;       /* サイズ変更禁止 */
+    
+}
+
 .selectbox {
     width: 310px;      /* 幅 */
 }
@@ -30,6 +39,12 @@
     top: 125px;
     left: 375px;
     height: 3em; /* 高さを3文字分 */
+}
+
+.button3 {
+    position: fixed;
+    top: 40px;
+    right: 75px;
 }
 
 .border {
@@ -49,9 +64,13 @@ padding: 5px 20px 10px 30px;
 }
 
 .space-right {
-  margin-right: 347px; /* 右側に12pxの余白 */
+  margin-right: 347px; /* 右側の余白 */
 }
 
 .space-right2 {
-  margin-right: 100px; /* 右側に12pxの余白 */
+  margin-right: 100px; /* 右側の余白 */
+}
+
+.space-left {
+  margin-left: 240px; /* 右側の余白 */
 }

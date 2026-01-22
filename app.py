@@ -31,7 +31,6 @@ login_manager.login_view = 'login'
 # 引数user_idにセッション内に登録されているIDが入ります
 @login_manager.user_loader
 def load_user(user_id):
-   #認証情報さえかえせればいいので、別に新規作成しても問題なし
     return User(user_id)
 
 @app.route("/login")
@@ -40,17 +39,17 @@ def login():
 
 @app.route("/login_check", methods=['GET', 'POST'])
 def login_check():
-    test_user = TestUser("user1", "testuser")
+    test_user = TestUser("user1", "testuser")#ユーザーID user1 パスワード testuser
     if user_check(test_user, request.form['userid'], request.form['pass']):
         login_user(User(1))
         return redirect(url_for('index'))
     else:
         return redirect(url_for('login'))
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout_user()
-    return "Logout完了"
+    return redirect(url_for('login'))
 
 # ルートにアクセスしたときの処理
 @app.route('/', methods=['GET', 'POST'])
@@ -61,6 +60,7 @@ def index():
 
 # メモの追加
 @app.route('/add', methods=['GET', 'POST'])
+@login_required
 def add_note():
     method_judge(request.method)
 
@@ -73,6 +73,7 @@ def add_note():
 
 # メモの削除
 @app.route('/del', methods=['GET', 'POST'])
+@login_required
 def del_note():
     method_judge(request.method)
         
@@ -84,6 +85,7 @@ def del_note():
 
 # メモの更新
 @app.route('/update', methods=['GET', 'POST'])
+@login_required
 def update_note():
     method_judge(request.method)
 
@@ -95,6 +97,7 @@ def update_note():
 
 # メモ更新の完了
 @app.route('/update_comp', methods=['GET', 'POST'])
+@login_required
 def updatecomp_note():
     method_judge(request.method)
     
