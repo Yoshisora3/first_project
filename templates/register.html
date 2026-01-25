@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>登録ページ</title>
+</head>
+<body>
+    <h2>登録ページ</h2>
+    <p>ユーザーID</p>
+    <div class="space-bottom"></div>
+    <form action="/register_comp" method="POST">
+        <textarea name="userid" class="login_textarea"  required></textarea>
+        <p>パスワード</p>
+        <textarea name="pass" class="login_textarea"  required></textarea>
+        <div class="space-bottom"></div>
+        <button type="submit" class="space-left">登録する</button>
+    </form>
+    <form  action="/login" method="POST">
+        <button type="submit" class="button4">戻る</button>
+    </form>
+</body>
+</html>

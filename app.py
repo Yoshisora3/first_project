@@ -1,9 +1,9 @@
 from flask import Flask, request, render_template, redirect, url_for
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
-from utils import id_search, method_judge
+from utils import id_search
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
-from auth.login import User, TestUser, user_check
+from auth.login import User, user_check
 
 # Flaskアプリの準備
 app = Flask(__name__)
@@ -19,6 +19,11 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 # モデル定義
+class UserModel(Base):
+    __tablename__ = 'users'
+    id = Column(String, primary_key=True)
+    pw = Column(String)
+
 class Notepad(Base):
     __tablename__ = 'notes'
     noteid = Column(Integer, primary_key=True)
@@ -33,20 +38,20 @@ login_manager.login_view = 'login'
 def load_user(user_id):
     return User(user_id)
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     return render_template('login.html')
 
-@app.route("/login_check", methods=['GET', 'POST'])
+@app.route("/login_check", methods=['POST'])
 def login_check():
-    test_user = TestUser("user1", "testuser")#ユーザーID user1 パスワード testuser
-    if user_check(test_user, request.form['userid'], request.form['pass']):
-        login_user(User(1))
+    user = session.query(UserModel).filter_by(id=request.form['userid']).first()
+    if user is not None and user_check(user, request.form['pass']):
+        login_user(User(user.id))
         return redirect(url_for('index'))
     else:
         return redirect(url_for('login'))
 
-@app.route('/logout', methods=['GET', 'POST'])
+@app.route('/logout', methods=['POST'])
 def logout():
     logout_user()
     return redirect(url_for('login'))
@@ -59,11 +64,9 @@ def index():
     return render_template('index.html', notes=notes, notecount=len(notes))
 
 # メモの追加
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/add', methods=['POST'])
 @login_required
 def add_note():
-    method_judge(request.method)
-
     if request.form['addnote'] != "":
         addnote = Notepad(note=request.form['addnote'])
         session.add(addnote)
@@ -72,11 +75,9 @@ def add_note():
     return redirect(url_for('index'))
 
 # メモの削除
-@app.route('/del', methods=['GET', 'POST'])
+@app.route('/del', methods=['POST'])
 @login_required
 def del_note():
-    method_judge(request.method)
-        
     if len(session.query(Notepad).all()) == 0:
         return redirect(url_for('index'))
     session.delete(id_search(session, request.form['delid'], Notepad))
@@ -84,11 +85,9 @@ def del_note():
     return redirect(url_for('index'))
 
 # メモの更新
-@app.route('/update', methods=['GET', 'POST'])
+@app.route('/update', methods=['POST'])
 @login_required
 def update_note():
-    method_judge(request.method)
-
     notes = session.query(Notepad).all()
     if len(notes) == 0:
         return redirect(url_for('index'))
@@ -96,16 +95,27 @@ def update_note():
     return render_template('update.html', notes=id_search(session, request.form['upnote'], Notepad))
 
 # メモ更新の完了
-@app.route('/update_comp', methods=['GET', 'POST'])
+@app.route('/update_comp', methods=['POST'])
 @login_required
 def updatecomp_note():
-    method_judge(request.method)
-    
     upnote = id_search(session, request.form['upid'], Notepad)
     upnote.note = request.form['upnote']
     session.commit()
 
     return redirect(url_for('index'))
 
+@app.route("/register", methods=['POST'])
+def register():
+    return render_template('register.html')
+
+@app.route("/register_comp", methods=['POST'])
+def register_comp():
+    if session.query(UserModel).filter_by(id=request.form['userid']).first() is None:
+        adduser = UserModel(id=request.form['userid'], pw=request.form['pass'])
+        session.add(adduser)
+        session.commit()
+        return redirect(url_for('login'))
+    else:
+        return "すでに同じユーザーIDが登録されています"
 if __name__ == '__main__':
     app.run(debug=True)

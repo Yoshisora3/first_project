@@ -47,6 +47,12 @@
     right: 75px;
 }
 
+.button4 {
+    position: fixed;
+    top: 243px;
+    left: 10px;
+}
+
 .border {
 max-width: 800px;
 display: inline-block;   /* 中身に合わせて幅が決まる */
