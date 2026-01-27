@@ -35,12 +35,13 @@ Webで簡単に使用できるメモ帳です
 - [メモの更新](#メモの更新)
 ### ログイン方法
 #### 1　新規登録ボタンをクリック  
-![addimage](https://github.com/user-attachments/assets/a9a809d8-e679-4b2c-bc98-6ab6feee0020)
+![loginimage](https://github.com/user-attachments/assets/a9a809d8-e679-4b2c-bc98-6ab6feee0020)
 #### 2　登録したいユーザーIDとパスワードを入力して登録するをクリック 
-![addimage](https://github.com/user-attachments/assets/5d005933-65da-4aab-addc-d005d1c49cc7)
+![loginimage2](https://github.com/user-attachments/assets/5d005933-65da-4aab-addc-d005d1c49cc7)
 #### 3　ログインページに戻るので、登録したユーザーIDとパスワードを入力してログインをクリック  
-![addimage]https://github.com/user-attachments/assets/042d6cb4-bd15-437a-bef7-0c96bc4b90ab)
+![loginimage3](https://github.com/user-attachments/assets/042d6cb4-bd15-437a-bef7-0c96bc4b90ab)
 #### 4　ログイン完了
+![loginimage4]()
 ### メモの追加
 #### 1　追加したいメモを、追加するの項目に入力して、その右側にある追加ボタンをクリック  
 ![addimage](https://github.com/user-attachments/assets/bcdcbd95-0f60-45ec-a7de-af95b00b499c)
