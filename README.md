@@ -29,7 +29,7 @@ Webで簡単に使用できるメモ帳です
 2　Python app.pyで起動します
 
 ## メモ帳機能の説明
-[メモの追加](#メモの追加)
+- [メモの追加](#メモの追加)
 ### メモの追加
 #### 1　追加したいメモを、追加するの項目に入力して、その右側にある追加ボタンをクリック  
 ![addimage](https://github.com/user-attachments/assets/bcdcbd95-0f60-45ec-a7de-af95b00b499c)
