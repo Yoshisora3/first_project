@@ -39,6 +39,7 @@ Webで簡単に使用できるメモ帳です
 #### 2　登録したいユーザーIDとパスワードを入力して登録するをクリック 
 ![addimage](https://github.com/user-attachments/assets/5d005933-65da-4aab-addc-d005d1c49cc7)
 #### 3　ログインページに戻るので、登録したユーザーIDとパスワードを入力してログインをクリック  
+![addimage]https://github.com/user-attachments/assets/042d6cb4-bd15-437a-bef7-0c96bc4b90ab)
 #### 4　ログイン完了
 ### メモの追加
 #### 1　追加したいメモを、追加するの項目に入力して、その右側にある追加ボタンをクリック  
