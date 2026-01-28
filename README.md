@@ -20,9 +20,10 @@ Webで簡単に使用できるメモ帳です
 - Flask-Login
 - werkzeug.security
 
-## 今後の機能改善  
+## 今後の改善点  
 - ユーザーごとにメモを管理
 - UIの改善
+- テストの作成
 
 ## 使用方法  
 1　Python、Flask、SQLAlchemy、flask-loginをインストール  
