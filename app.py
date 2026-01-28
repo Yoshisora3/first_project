@@ -1,9 +1,10 @@
 from flask import Flask, request, render_template, redirect, url_for
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import declarative_base, sessionmaker
 from utils import id_search
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
-from auth.login import User, user_check
+from auth.login import User
+from werkzeug.security import generate_password_hash, check_password_hash
+from models import Base, Notepad, UserModel
+from database import engine, Session
 
 # Flaskアプリの準備
 app = Flask(__name__)
@@ -12,23 +13,8 @@ app.secret_key = "test"
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-# SQLAlchemyの準備
-engine = create_engine('sqlite:///flask_memo.db')
-Base = declarative_base()
-Session = sessionmaker(bind=engine)
 session = Session()
-
-# モデル定義
-class UserModel(Base):
-    __tablename__ = 'users'
-    id = Column(String, primary_key=True)
-    pw = Column(String)
-
-class Notepad(Base):
-    __tablename__ = 'notes'
-    noteid = Column(Integer, primary_key=True)
-    note = Column(String)
-
+    
 Base.metadata.create_all(engine)
 
 login_manager.login_view = 'login'
@@ -45,7 +31,7 @@ def login():
 @app.route("/login_check", methods=['POST'])
 def login_check():
     user = session.query(UserModel).filter_by(id=request.form['userid']).first()
-    if user is not None and user_check(user, request.form['pass']):
+    if user is not None and check_password_hash(user.pw, request.form['pass']):
         login_user(User(user.id))
         return redirect(url_for('index'))
     else:
@@ -111,11 +97,13 @@ def register():
 @app.route("/register_comp", methods=['POST'])
 def register_comp():
     if session.query(UserModel).filter_by(id=request.form['userid']).first() is None:
-        adduser = UserModel(id=request.form['userid'], pw=request.form['pass'])
+        hashed_pw = generate_password_hash(request.form['pass'])
+        adduser = UserModel(id=request.form['userid'], pw=hashed_pw)
         session.add(adduser)
         session.commit()
         return redirect(url_for('login'))
     else:
         return "すでに同じユーザーIDが登録されています"
+    
 if __name__ == '__main__':
     app.run(debug=True)
