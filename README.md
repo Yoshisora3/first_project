@@ -12,13 +12,13 @@ Webで簡単に使用できるメモ帳です
 ## 使用技術
 - Python
 - Flask
-- HTML / CSS
+- HTML
+- CSS
 - SQLite
 - SQLAlchemy
 - Jinja2
 - Flask-Login
-- Werkzeug
-  - werkzeug.security
+- werkzeug.security
 
 ## 今後の機能改善  
 - ユーザーごとにメモを管理
