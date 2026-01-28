@@ -10,14 +10,15 @@ Webで簡単に使用できるメモ帳です
 - Windows
 
 ## 使用技術
-・Python
-・Flask
-・HTML
-・CSS
-・SQLite
-・SQLAlchemy
-・Jinja2
-・Flask-Login
+- Python
+- Flask
+- HTML / CSS
+- SQLite
+- SQLAlchemy
+- Jinja2
+- Flask-Login
+- Werkzeug
+  - werkzeug.security
 
 ## 今後の機能改善  
 - ユーザーごとにメモを管理
