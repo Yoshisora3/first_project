@@ -46,7 +46,8 @@ def logout():
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def index():
-    notes = session.query(Notepad).all()
+    notes = session.query(Notepad).filter_by(userid=current_user.id).all()
+    
     return render_template('index.html', notes=notes, notecount=len(notes))
 
 # メモの追加
@@ -54,7 +55,7 @@ def index():
 @login_required
 def add_note():
     if request.form['addnote'] != "":
-        addnote = Notepad(note=request.form['addnote'])
+        addnote = Notepad(note=request.form['addnote'], userid=current_user.id)
         session.add(addnote)
         session.commit()
     
@@ -64,9 +65,9 @@ def add_note():
 @app.route('/del', methods=['POST'])
 @login_required
 def del_note():
-    if len(session.query(Notepad).all()) == 0:
+    if len(session.query(Notepad).filter_by(userid=current_user.id).all()) == 0:
         return redirect(url_for('index'))
-    session.delete(id_search(session, request.form['delid'], Notepad))
+    session.delete(id_search(session, request.form['delid'], Notepad, current_user.id))
     session.commit()
     return redirect(url_for('index'))
 
@@ -74,17 +75,17 @@ def del_note():
 @app.route('/update', methods=['POST'])
 @login_required
 def update_note():
-    notes = session.query(Notepad).all()
+    notes = session.query(Notepad).filter_by(userid=current_user.id).all()
     if len(notes) == 0:
         return redirect(url_for('index'))
         
-    return render_template('update.html', notes=id_search(session, request.form['upnote'], Notepad))
+    return render_template('update.html', notes=id_search(session, request.form['upnote'], Notepad, current_user.id))
 
 # メモ更新の完了
 @app.route('/update_comp', methods=['POST'])
 @login_required
 def updatecomp_note():
-    upnote = id_search(session, request.form['upid'], Notepad)
+    upnote = id_search(session, request.form['upid'], Notepad, current_user.id)
     upnote.note = request.form['upnote']
     session.commit()
 
