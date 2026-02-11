@@ -1,6 +1,6 @@
-.aqua {
+.gray {
 	height: 250px;
-	background-color: #CCFFFF;
+	background-color: #dcdcdc;
     border-radius: 10px; /* この行で角を丸くする */
 }
 
